@@ -21,7 +21,7 @@ public class Vault {
             VAULT_ENABLED = true;
             Vault.setupEconomy();
             Vault Vault = new Vault();
-            Vault.setupChat();
+            //Vault.setupChat();
             Vault.setupPermissions();
 
 

@@ -5,6 +5,7 @@ import com.ender.globalmarket.economy.MarketData;
 import com.ender.globalmarket.economy.MarketEconomy;
 import com.ender.globalmarket.money.Vault;
 import com.ender.globalmarket.player.PlayerRegData;
+import com.google.common.collect.Lists;
 import com.mysql.cj.BindValue;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -22,7 +23,7 @@ import static org.bukkit.Bukkit.getLogger;
 
 public class MarketGUI {
 
-    public static List<String> GUIName = List.of("全球市场", "贸易");
+    public static List<String> GUIName = Lists.newArrayList("全球市场", "贸易");
 
 
     public static List<String> getGUIName() {
@@ -68,7 +69,9 @@ public class MarketGUI {
 
         int item_counter = 0;
 
-        if (pages == 0) pages = 1;
+        if (pages == 0) {
+            pages = 1;
+        }
 
         for (int i = 0; i < pages; i++) {
             inv.add(Bukkit.createInventory(player, 6 * 9, String.format("全球市场%s/%s", i + 1, pages)));
@@ -83,7 +86,8 @@ public class MarketGUI {
             //中间显示用户信息
             ItemStack playerData = new ItemStack(Material.PLAYER_HEAD);
             ItemMeta playerDataMeta = playerData.getItemMeta();
-            playerDataMeta.setLore(List.of(String.format("你的账户余额:$%s", Vault.checkCurrency(player.getUniqueId())), String.format("是否拥有免税特权：%s",  (PlayerRegData.isVIP(player) ? "是" : "否"))));
+
+            playerDataMeta.setLore(Lists.newArrayList(String.format("你的账户余额:$%s", Vault.checkCurrency(player.getUniqueId())), String.format("是否拥有免税特权：%s",  (PlayerRegData.isVIP(player) ? "是" : "否"))));
             playerDataMeta.setDisplayName(String.format("玩家信息:%s", player.getDisplayName()));
             playerData.setItemMeta(playerDataMeta);
 
@@ -110,7 +114,9 @@ public class MarketGUI {
             inv.get(i).setItem(8, right);
 
             for (int j = 0; j < 5 * 9 ; j++) {
-                if (item_counter >= marketItems.size()) inv.get(i).setItem(j + 9, empty);
+                if (item_counter >= marketItems.size()) {
+                    inv.get(i).setItem(j + 9, empty);
+                }
                 else {
                     ItemStack item = new ItemStack(marketItems.get(item_counter).item, 1);
                     ItemMeta itemMeta = item.getItemMeta();
@@ -138,7 +144,11 @@ public class MarketGUI {
         //物品显示
         ItemStack itemSelf = new ItemStack(item.item);
         ItemMeta selfMeta = itemSelf.getItemMeta();
-        selfMeta.setLore(List.of(String.format("库存：%s", item.x), String.format("单价：$%s", MarketEconomy.formatMoney(MarketEconomy.calculate(item))), String.format("名称：%s", item.item.name())));
+        List<String> temp = new ArrayList<>();
+        temp.add(String.format("库存：%s", item.x));
+        temp.add(String.format("单价：$%s", MarketEconomy.formatMoney(MarketEconomy.calculate(item))));
+        temp.add(String.format(String.format("名称：%s", item.item.name())));
+        selfMeta.setLore(temp);
         itemSelf.setItemMeta(selfMeta);
         //购买按钮
         ItemStack buy = new ItemStack(Material.EMERALD);

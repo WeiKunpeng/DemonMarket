@@ -14,7 +14,37 @@
     <remote-repository>
       <option name="id" value="sonatype" />
       <option name="name" value="sonatype" />
+      <option name="url" value="http://maven.lianjia.com/content/groups/Lianjia-SSC-Group/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="sonatype" />
+      <option name="name" value="sonatype" />
       <option name="url" value="https://oss.sonatype.org/content/groups/public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="spigotmc-repo" />
+      <option name="name" value="spigotmc-repo" />
+      <option name="url" value="http://maven.lianjia.com/content/groups/Lianjia-SSC-Group/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Maven Central repository" />
+      <option name="url" value="https://repo1.maven.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="central" />
+      <option name="url" value="http://maven.lianjia.com/content/groups/Lianjia-SSC-Group/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="snapshots" />
+      <option name="name" value="snapshots" />
+      <option name="url" value="http://maven.lianjia.com/content/groups/Lianjia-SSC-Group/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="jitpack.io" />
+      <option name="name" value="jitpack.io" />
+      <option name="url" value="http://maven.lianjia.com/content/groups/Lianjia-SSC-Group/" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="spigot-repo" />
@@ -27,9 +57,9 @@
       <option name="url" value="https://hub.spigotmc.org/nexus/content/repositories/snapshots/" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="central" />
-      <option name="name" value="Maven Central repository" />
-      <option name="url" value="https://repo1.maven.org/maven2" />
+      <option name="id" value="releases" />
+      <option name="name" value="releases" />
+      <option name="url" value="http://maven.lianjia.com/content/groups/Lianjia-SSC-Group/" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="jboss.community" />

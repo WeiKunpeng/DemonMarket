@@ -98,7 +98,9 @@ public class UserCommand implements CommandExecutor {
 //                } else {
 //                    sender.sendMessage(ChatColor.YELLOW + "[GlobalMarket]你需要将需要出售的物品拿在主手中");
 //                }
-                if (args.length != 3) return false;
+                if (args.length != 3) {
+                    return false;
+                }
 
                 Material itemToSell = Material.matchMaterial(args[1]);
                 if (itemToSell == null) {
@@ -149,7 +151,9 @@ public class UserCommand implements CommandExecutor {
                 break;
             }
             case "calc": {
-                if (args.length != 4) return false;
+                if (args.length != 4) {
+                    return false;
+                }
                 Material item = Material.matchMaterial(args[2]);
                 if (item == null) {
                     sender.sendMessage(ChatColor.YELLOW + "[GlobalMarket]未找到查询的物品，请检查拼写格式是否为例如minecraft:diamond的样式");

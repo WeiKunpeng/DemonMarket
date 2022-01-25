@@ -11,7 +11,7 @@ public final class ConfigReader {
         return config.getString(mysqlConfigTag);
     }
 
-    public static double getTaxRate() {
+    public static double getRate() {
         return config.getDouble("TaxRate");
     }
 
@@ -22,4 +22,7 @@ public final class ConfigReader {
         return config.getBoolean("Enable." + enableTag);
     }
 
+    public static double getTaxRate() {
+        return config.getDouble("TaxRate");
+    }
 }

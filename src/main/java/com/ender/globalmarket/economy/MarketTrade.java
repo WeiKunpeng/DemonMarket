@@ -43,6 +43,7 @@ public class MarketTrade {
                 Inventory.addInventory(player, marketItem.item, amount);
                 break;
             }
+            default:break;
         }
         //记录贸易
         log(player, marketItem.item, type, price, tax, amount);

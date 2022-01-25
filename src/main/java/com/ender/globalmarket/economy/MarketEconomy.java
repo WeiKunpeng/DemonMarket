@@ -39,7 +39,7 @@ public class MarketEconomy {
     //价格计算函数式:f(x)=k/(x+1)^(1/b)
     public static double calculate(MarketItem item) {
         double price = item.k / Math.pow((double) item.x + 1.0,  1.0 / (double) item.b);
-        return Math.max(price, 0.01);
+        return price;
     }
 
 

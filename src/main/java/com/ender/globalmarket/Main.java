@@ -3,8 +3,6 @@ package com.ender.globalmarket;
 import com.ender.globalmarket.command.AdminCommand;
 import com.ender.globalmarket.command.UserCommand;
 import com.ender.globalmarket.data.MarketItem;
-import com.ender.globalmarket.event.GUIAction;
-import com.ender.globalmarket.event.GUIInput;
 import com.ender.globalmarket.money.Vault;
 import com.ender.globalmarket.storage.Mysql;
 import com.ender.globalmarket.storage.MysqlInit;
@@ -37,8 +35,6 @@ public class Main extends JavaPlugin {
         if (Bukkit.getPluginCommand("globalmarketadmin") != null) {
             Bukkit.getPluginCommand("globalmarketadmin").setExecutor(new AdminCommand());
         }
-        Bukkit.getPluginManager().registerEvents(new GUIAction(), this);
-        Bukkit.getPluginManager().registerEvents(new GUIInput(), this);
 
         Vault.vaultSetup();
 

@@ -29,8 +29,11 @@ public class MarketData {
                 marketItem.x = resultSet.getInt("x");
                 marketItem.k = resultSet.getInt("k");
                 marketItem.b = resultSet.getInt("b");
-                if (marketItem.item != null) list.add(marketItem);
-                else getLogger().warning(String.format("[GlobalMarket]We found an illegal item in your database which names '%s'. Please check if it's a bug.", resultSet.getString("item_name")));
+                if (marketItem.item != null) {
+                    list.add(marketItem);
+                } else {
+                    getLogger().warning(String.format("[GlobalMarket]We found an illegal item in your database which names '%s'. Please check if it's a bug.", resultSet.getString("item_name")));
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();

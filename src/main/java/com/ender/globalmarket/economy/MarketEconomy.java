@@ -1,5 +1,6 @@
 package com.ender.globalmarket.economy;
 
+import com.ender.globalmarket.common.MathUtil;
 import com.ender.globalmarket.data.MarketItem;
 import com.ender.globalmarket.storage.ConfigReader;
 import org.bukkit.Material;
@@ -8,8 +9,13 @@ import static org.bukkit.Bukkit.getLogger;
 
 public class MarketEconomy {
 
+    /**
+     * 规范化数字，目前不做处理
+     * @param money
+     * @return
+     */
     public static double formatMoney(double money) {
-        return Double.parseDouble(String.format("%.2f", money));
+        return money;
     }
 
     public static double getBuyingPrice(MarketItem item, int count) {
@@ -23,12 +29,22 @@ public class MarketEconomy {
         return formatMoney(price);
     }
 
-    public static double getSellingPrice(MarketItem item, int count) {
+    /**
+     * 计算出售价格
+     * @param item 物品
+     * @param count 数量
+     * @param money 玩家资产
+     * @return 结算价格
+     */
+    public static double getSellingPrice(MarketItem item, int count,double money) {
         double price = 0.0;
+        double onePrice = 0.0;
+
         while (count > 0) {
             count--;
-            price += calculate(item);
-            item.x++;
+            onePrice += MathUtil.priceDownByProperty(item.x,money);
+            price += onePrice;
+            money += onePrice;
         }
         return formatMoney(price);
     }

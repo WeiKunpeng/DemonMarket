@@ -13,7 +13,9 @@ public class MarketXHandler implements RandomEventHandler {
     public void run(MarketEvent event) {
         MarketItem marketItem = MarketData.getMarketItem(event.material);
 
-        if (marketItem == null) return;
+        if (marketItem == null) {
+            return;
+        }
         //广播全服
         Bukkit.broadcast(ChatColor.DARK_GREEN + "[GlobalMarket]" + event.ban, "globalmarket.broadcast");
 

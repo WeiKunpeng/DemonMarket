@@ -8,15 +8,10 @@ depend:
 commands:
   globalmarket: # 命令的基本名，请不要使用奇怪的字符！
     aliases: # 别名，方便玩家使用
-      - gmm
-    usage: | 
-      /globalmarket money 查看账户余额
-      /globalmarket list 查看可交易物品列表
-      /globalmarket sell <物品名称(格式minecraft:xxx)> <数量> 出售一定数量物品，数量输入all可以出售所有此种物品
-      /globalmarket buy <物品名称(格式minecraft:xxx)> <数量> 购买一定数量物品
-      /globalmarket calc [buy/sell] <物品名称(格式minecraft:xxx)> <数量> 计算出售或购买一定数量物品的价格
-      /globalmarket help 查看命令提示
-      /gm 命令可简写为gm
+      - mt
+    usage: |
+      /mt sell 出售手里的物品
+      /mt sell all 出售背包里当前所有与手中相同的物品
     description: Buy or sell some item in player's inventory # 描述
     permission: globalmarket.use
     permission-message: You need to have the permission to use this command. Please contact your server OP. # 无权限返回的消息，通常不用

@@ -38,6 +38,7 @@ public class RandomEventWatcher extends TimerTask {
             case BANK_INTEREST_RATE: {
                 break;
             }
+            default:break;
         }
         assert randomEventHandler != null;
         randomEventHandler.run(event);

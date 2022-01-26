@@ -52,7 +52,9 @@ public class Inventory {
         ItemStack[] itemStacks = player.getInventory().getContents();
         int count = 0;
         for (ItemStack itemStack : itemStacks) {
-            if (itemStack == null) count++;
+            if (itemStack == null) {
+                count++;
+            }
         }
         return count;
     }

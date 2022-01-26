@@ -1,10 +1,12 @@
 package com.ender.globalmarket.economy;
 
+import com.ender.globalmarket.common.AppConst;
 import com.ender.globalmarket.data.MarketItem;
 import com.ender.globalmarket.money.Vault;
 import com.ender.globalmarket.player.Inventory;
 import com.ender.globalmarket.player.PlayerRegData;
 import com.ender.globalmarket.storage.Mysql;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -19,28 +21,24 @@ public class MarketTrade {
 
     //贸易
     public static void trade(Player player, MarketItem marketItem, int amount, type type) {
+        //服主
+        Player op = Bukkit.getPlayer(AppConst.OP);
         double price = 0.0;
         double tax = 0.0;
+        //玩家存款
+        double money = Vault.checkCurrency(player.getUniqueId());
         switch (type) {
             case SELL: {
                 //计算价格
-                price = MarketEconomy.getSellingPrice(marketItem, amount);
+                price = MarketEconomy.getSellingPrice(marketItem, amount,money);
                 //计算贸易税
-                tax = (PlayerRegData.isVIP(player)) ? 0.0 : MarketEconomy.getTax(price);
-                //更新市场数据
-                MarketData.updateMarketItem(marketItem);
+                tax = MarketEconomy.getTax(price);
                 //更新玩家货币数据
                 Vault.addVaultCurrency(player.getUniqueId(), price - tax);
+                //给服主上税
+                Vault.addVaultCurrency(op.getUniqueId(),tax);
                 //更新玩家储存
                 Inventory.subtractInventory(player, marketItem.item, amount);
-                break;
-            }
-            case BUY: {
-                price = MarketEconomy.getBuyingPrice(marketItem, amount);
-                tax = (PlayerRegData.isVIP(player)) ? 0.0 : MarketEconomy.getTax(price);
-                MarketData.updateMarketItem(marketItem);
-                Vault.subtractCurrency(player.getUniqueId(), price + tax);
-                Inventory.addInventory(player, marketItem.item, amount);
                 break;
             }
             default:break;
@@ -87,8 +85,15 @@ public class MarketTrade {
         return MarketData.getMarketItem(material) != null;
     }
     //检测市场库存是否充足
+
+    /**
+     * 监测库存，目前设定永远充足
+     * @param marketItem
+     * @param amount
+     * @return
+     */
     public static boolean isMarketXEnough(MarketItem marketItem, int amount) {
-        return marketItem.x >= amount;
+        return true;
     }
     //检测玩家背包中是否有足够的物品
     public static boolean isPlayerItemEnough(Player player, Material material, int amount) {

@@ -21,6 +21,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -30,6 +31,7 @@ public class UserCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+
         if (!(sender instanceof Player)) {
             return false;
         }
@@ -40,14 +42,10 @@ public class UserCommand implements CommandExecutor {
 
         Player player = (Player) sender;
         UUID uuid = player.getUniqueId();
-        switch (args[0]) {
+        switch (args[0].toLowerCase(Locale.ROOT)) {
             case "sell": {
                 Material itemToSell = player.getInventory().getItemInMainHand().getType();
-                if(itemToSell.name().equals("AIR")){
-                    sender.sendMessage(ChatColor.YELLOW + "[GlobalMarket]你手里的物品无法交易");
-                    return true;
-                }
-                if (itemToSell == null) {
+                if(Objects.isNull(itemToSell) || itemToSell.name().equals("AIR")){
                     sender.sendMessage(ChatColor.YELLOW + "[GlobalMarket]你手里的物品无法交易");
                     return true;
                 }
@@ -63,6 +61,9 @@ public class UserCommand implements CommandExecutor {
                     sellAmount = player.getInventory().getItemInMainHand().getAmount();
                     MarketTrade.trade(player, marketItem, sellAmount, MarketTrade.type.SELL);
                     break;
+                }
+                if(!"all".equals(args[1].toLowerCase(Locale.ROOT))){
+                    return true;
                 }
 
                 sellAmount = amountInInventory;

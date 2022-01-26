@@ -42,9 +42,15 @@ public class AcquireTask  implements Runnable{
         MarketTrade.randomRestCount = new AtomicInteger(getRandomCount());
         Material item = MarketTrade.randomAcquire.item;
         //广播全服
-        TranslatableComponent name = Component.translatable(item.name());
+        TranslatableComponent name = Component.translatable(Material.STICK.name());
 
         StringBuilder stringBuilder = new StringBuilder();
+        BukkitAudiences bukkitAudiences = BukkitAudiences.create(plugin);
+        List<Player> players = BukkitUtil.getAllOnlineUser();
+        for(Player p : players){
+            bukkitAudiences.player(p).sendMessage(name);
+        }
+
         //Bukkit.broadcast(ChatColor.DARK_GREEN + "[Market]","globalmarket.broadcast");
     }
 

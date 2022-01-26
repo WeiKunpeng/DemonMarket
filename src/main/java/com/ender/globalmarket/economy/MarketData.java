@@ -68,31 +68,20 @@ public class MarketData {
     }
 
 
+    /**
+     * 获取市场物品
+     * 如果找不到则返回空
+     * @param item 玩家发送的物品
+     * @return 市场物品，如果找不到则返回空
+     */
     public static MarketItem getMarketItem(Material item) {
-        Mysql m = new Mysql();
-        m.prepareSql("SELECT * FROM market_item_data where item_name = ?");
-        m.setData(1, item.name());
-        m.execute();
-        ResultSet r = m.getResult();
-        MarketItem marketItem = new MarketItem();
-
-        try {
-            r.next();
-
-
-            if (r.getString("item_name") == null) {
-                return null;
+        List<MarketItem> marketItems = MarketData.getAllMarketItems();
+        for(MarketItem mi : marketItems){
+            if(mi.item.name().equals(item.name())){
+                return mi;
             }
-
-            marketItem.item = item;
-            marketItem.x = r.getInt("x");
-            marketItem.k = r.getInt("k");
-            marketItem.b = r.getInt("b");
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        m.close();
-        return marketItem;
+        return  null;
     }
 
     public static void putMarketItem(MarketItem item) {

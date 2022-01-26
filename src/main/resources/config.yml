@@ -16,3 +16,16 @@ TimeOut.Trade: 10
 
 #随机事件最小间隔时间
 CD.MarketEvent: 1200
+
+#服主，税率受益人
+OP: Tining
+
+#收购最低数量
+ACQUIRE_BASE: 3000
+#收购数量随机增长额度
+ACQUIRE_GAP: 4000
+#收购物品的价格上限
+CQUIRE_MAX_PRICE: 50
+
+#资产基线
+BasicProperty: 500000

@@ -55,7 +55,7 @@ public class UserCommand implements CommandExecutor {
                     sender.sendMessage(ChatColor.YELLOW + "[Market]你输入的物品当前不可交易");
                     return true;
                 }
-                if (marketItem.x == 0){
+                if (marketItem.x == null || marketItem.x == 0){
                     sender.sendMessage(ChatColor.YELLOW + "[Market]你输入的物品当前一文不值");
                     return true;
                 }

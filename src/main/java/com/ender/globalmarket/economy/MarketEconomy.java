@@ -5,9 +5,15 @@ import com.ender.globalmarket.data.MarketItem;
 import com.ender.globalmarket.storage.ConfigReader;
 import org.bukkit.Material;
 
+import java.util.logging.Logger;
+
 import static org.bukkit.Bukkit.getLogger;
 
+
 public class MarketEconomy {
+
+    public static double basicProperty = ConfigReader.config.getInt("ACQUIRE_BASE");
+    public static Logger logger = Logger.getLogger("money");
 
     /**
      * 规范化数字，目前不做处理
@@ -42,7 +48,7 @@ public class MarketEconomy {
 
         while (count > 0) {
             count--;
-            onePrice += MathUtil.priceDownByProperty(item.x,money);
+            onePrice = MathUtil.priceDownByProperty(item.x,money,basicProperty);
             price += onePrice;
             money += onePrice;
         }

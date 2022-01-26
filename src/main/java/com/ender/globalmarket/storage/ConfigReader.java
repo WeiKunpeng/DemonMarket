@@ -5,7 +5,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 public final class ConfigReader {
 
-    static FileConfiguration config = Main.instance.getConfig();
+    public static FileConfiguration config = Main.instance.getConfig();
 
     public static String getMysqlConfig(String mysqlConfigTag) {
         return config.getString(mysqlConfigTag);
@@ -25,4 +25,6 @@ public final class ConfigReader {
     public static double getTaxRate() {
         return config.getDouble("TaxRate");
     }
+
+
 }

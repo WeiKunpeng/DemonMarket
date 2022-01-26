@@ -1,20 +1,16 @@
 package com.ender.globalmarket.task;
 
 import com.ender.globalmarket.Main;
-import com.ender.globalmarket.common.AppConst;
 import com.ender.globalmarket.common.BukkitUtil;
 import com.ender.globalmarket.data.MarketItem;
 import com.ender.globalmarket.economy.MarketData;
 import com.ender.globalmarket.economy.MarketTrade;
-import net.kyori.adventure.audience.Audience;
+import com.ender.globalmarket.storage.ConfigReader;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TranslatableComponent;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 import java.util.Random;
@@ -32,6 +28,23 @@ public class AcquireTask  implements Runnable{
     public AcquireTask(Main plugin) {
         this.plugin = plugin;
     }
+
+    public static String op = ConfigReader.config.getString("OP");
+
+    /**
+     * 收购最低数量
+     */
+    public static int ACQUIRE_BASE = ConfigReader.config.getInt("ACQUIRE_BASE");
+
+    /**
+     * 收购数量随机增长额度
+     */
+    public static int ACQUIRE_GAP = ConfigReader.config.getInt("ACQUIRE_GAP");
+
+    /**
+     * 收购物品的价格上限
+     */
+    public static int ACQUIRE_MAX_PRICE = ConfigReader.config.getInt("ACQUIRE_MAX_PRICE");
 
     /**
      * 进行随机收购事件
@@ -61,7 +74,7 @@ public class AcquireTask  implements Runnable{
     public MarketItem getRandomItem(){
         List<MarketItem> list = MarketData.getMarketItem();
         //取出剩下的
-        list = list.stream().filter(e -> e.x <= AppConst.ACQUIRE_MAX_PRICE).collect(Collectors.toList());
+        list = list.stream().filter(e -> e.x <= ACQUIRE_MAX_PRICE).collect(Collectors.toList());
 
         Random r = new Random();
         int index = r.nextInt(list.size());
@@ -75,6 +88,6 @@ public class AcquireTask  implements Runnable{
      */
     public int getRandomCount(){
         Random r = new Random();
-        return AppConst.ACQUIRE_BASE + r.nextInt(AppConst.ACQUIRE_GAP);
+        return ACQUIRE_BASE + r.nextInt(ACQUIRE_GAP);
     }
 }

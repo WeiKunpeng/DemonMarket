@@ -6,17 +6,19 @@ import com.ender.globalmarket.data.MarketItem;
 import com.ender.globalmarket.economy.MarketData;
 import com.ender.globalmarket.economy.MarketTrade;
 import com.ender.globalmarket.storage.ConfigReader;
-import net.kyori.adventure.platform.bukkit.BukkitAudiences;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TranslatableComponent;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
+import com.tripleying.qwq.LocaleLanguageAPI.LocaleLanguageAPI;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+
 
 /**
  * 随机收购事件
@@ -46,6 +48,7 @@ public class AcquireTask  implements Runnable{
      */
     public static int ACQUIRE_MAX_PRICE = ConfigReader.config.getInt("ACQUIRE_MAX_PRICE");
 
+
     /**
      * 进行随机收购事件
      */
@@ -54,16 +57,16 @@ public class AcquireTask  implements Runnable{
         MarketTrade.randomAcquire = getRandomItem();
         MarketTrade.randomRestCount = new AtomicInteger(getRandomCount());
         Material item = MarketTrade.randomAcquire.item;
+        ItemStack is = new ItemStack(item);
+        Logger.getLogger("s").info(LocaleLanguageAPI.getItemName(is));
         //广播全服
-        TranslatableComponent name = Component.translatable(Material.STICK.name());
-
-        StringBuilder stringBuilder = new StringBuilder();
-        BukkitAudiences bukkitAudiences = BukkitAudiences.create(plugin);
-        List<Player> players = BukkitUtil.getAllOnlineUser();
-        for(Player p : players){
-            bukkitAudiences.player(p).sendMessage(name);
-        }
-
+//        TranslatableComponent name = Component.translatable(Material.STICK.name());
+//        StringBuilder stringBuilder = new StringBuilder();
+//        BukkitAudiences bukkitAudiences = BukkitAudiences.create(plugin);
+//        List<Player> players = BukkitUtil.getAllOnlineUser();
+//        for(Player p : players){
+//            bukkitAudiences.player(p).sendMessage(name);
+//        }
         //Bukkit.broadcast(ChatColor.DARK_GREEN + "[Market]","globalmarket.broadcast");
     }
 

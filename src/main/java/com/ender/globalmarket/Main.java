@@ -6,10 +6,12 @@ import com.ender.globalmarket.data.MarketItem;
 import com.ender.globalmarket.money.Vault;
 import com.ender.globalmarket.storage.Mysql;
 import com.ender.globalmarket.storage.MysqlInit;
+import com.ender.globalmarket.task.AcquireTask;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.plugin.java.JavaPlugin;
+import com.tripleying.qwq.LocaleLanguageAPI.*;
 
 import java.util.logging.Logger;
 
@@ -56,5 +58,9 @@ public class Main extends JavaPlugin {
         getLogger().info(ChatColor.GREEN + "欢迎使用Ender's Global Market插件，加载成功");
         getLogger().info(ChatColor.GREEN + "本插件赠予开源社区，源代码地址：https://github.com/EnderTheCoder/GlobalMarket");
 
+        //注册定时
+        //两分钟查一次最大人数
+        Bukkit.getScheduler().runTaskTimerAsynchronously
+                (this, new AcquireTask(this), 0L, 20 * 60L * 2);
     }
 }

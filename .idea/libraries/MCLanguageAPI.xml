@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="MCLanguageAPI">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/main/lib/MCLanguageAPI.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

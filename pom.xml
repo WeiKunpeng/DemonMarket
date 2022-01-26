@@ -11,22 +11,6 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>2.4.3</version>
-                <configuration>
-                    <!-- put your configurations here -->
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>2.4.1</version>
                 <configuration>
@@ -68,21 +52,15 @@
             <id>sonatype</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
         </repository>
-        <repository>
-            <id>lang-utils-repo</id>
-            <url>https://raw.github.com/MascusJeoraly/LanguageUtils/mvn-repo/</url>
-        </repository>
-        <repository> <!-- for development builds -->
-            <id>sonatype-oss-snapshots</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-        </repository>
     </repositories>
 
     <dependencies>
         <dependency>
-            <groupId>net.kyori</groupId>
-            <artifactId>adventure-platform-bukkit</artifactId>
-            <version>4.0.1</version>
+            <groupId>org.apache</groupId>
+            <artifactId>LocaleLanguageAPI</artifactId>
+            <version>1.1.1</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/lib/LocaleLanguageAPI-v1.1.1.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>javax.annotation</groupId>
@@ -111,7 +89,6 @@
             <version>1.12.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
-
 
     </dependencies>
     <properties>

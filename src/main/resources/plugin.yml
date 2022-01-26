@@ -5,6 +5,7 @@ version: 1.0
 # 以上是插件基本信息，以下是命令注册
 depend:
   - Vault
+  - LangUtils
 commands:
   market: # 命令的基本名，请不要使用奇怪的字符！
     aliases: # 别名，方便玩家使用

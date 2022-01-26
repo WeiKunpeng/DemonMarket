@@ -46,13 +46,17 @@ public class UserCommand implements CommandExecutor {
             case "sell": {
                 Material itemToSell = player.getInventory().getItemInMainHand().getType();
                 if(Objects.isNull(itemToSell) || itemToSell.name().equals("AIR")){
-                    sender.sendMessage(ChatColor.YELLOW + "[GlobalMarket]你手里的物品无法交易");
+                    sender.sendMessage(ChatColor.YELLOW + "[Market]你手里的物品无法交易");
                     return true;
                 }
                 //检测此种物品是否可交易
                 MarketItem marketItem = MarketData.getMarketItem(itemToSell);
                 if (marketItem == null) {
-                    sender.sendMessage(ChatColor.YELLOW + "[GlobalMarket]你输入的物品当前不可交易，请使用命令/globalmarket list查询可交易物品列表");
+                    sender.sendMessage(ChatColor.YELLOW + "[Market]你输入的物品当前不可交易");
+                    return true;
+                }
+                if (marketItem.x == 0){
+                    sender.sendMessage(ChatColor.YELLOW + "[Market]你输入的物品当前一文不值");
                     return true;
                 }
                 int amountInInventory = Inventory.calcInventory(player, itemToSell);

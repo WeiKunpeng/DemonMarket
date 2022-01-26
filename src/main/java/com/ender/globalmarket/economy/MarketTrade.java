@@ -12,10 +12,31 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 import java.sql.Timestamp;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class MarketTrade {
+
+    /**
+     * 随机收购物品
+     */
+    public static MarketItem randomAcquire;
+
+    /**
+     * 剩余收购数量
+     */
+    public static AtomicInteger randomRestCount;
+
+    /**
+     * 交易类型
+     */
     public enum type{
+        /**
+         * 出售
+         */
         SELL,
+        /**
+         * 购买
+         */
         BUY
     }
 

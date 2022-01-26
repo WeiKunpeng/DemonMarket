@@ -2,17 +2,41 @@ package com.ender.globalmarket.economy;
 
 import com.ender.globalmarket.data.MarketItem;
 import com.ender.globalmarket.storage.Mysql;
+import com.google.common.collect.Lists;
+import javafx.beans.binding.ObjectExpression;
 import org.bukkit.Material;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static org.bukkit.Bukkit.getLogger;
 
 public class MarketData {
-    public static List<MarketItem> getAllMarketItems(){
+    /**
+     * 所有市场物品
+     */
+    private static List<MarketItem> markeList;
+
+    /**
+     * 获取市场物品
+     * @return 市场物品列表
+     */
+    public static List<MarketItem> getMarketItem() {
+        return Lists.newArrayList(getAllMarketItems());
+    }
+
+    /**
+     * 获取所有市场物品
+     * @return
+     */
+    private static List<MarketItem> getAllMarketItems(){
+        if(!Objects.isNull(markeList) && !markeList.isEmpty()){
+            return markeList;
+        }
+
         Mysql m = new Mysql();
 
         List<MarketItem> list = new ArrayList<>();
@@ -39,6 +63,7 @@ public class MarketData {
             e.printStackTrace();
         }
         m.close();
+        markeList = list;
         return list;
     }
 

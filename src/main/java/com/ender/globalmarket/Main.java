@@ -19,6 +19,7 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        Bukkit.getScheduler().cancelTasks(this);
         log.info(String.format("[%s] Disabled Version %s", getDescription().getName(), getDescription().getVersion()));
     }
 
@@ -29,11 +30,8 @@ public class Main extends JavaPlugin {
         saveDefaultConfig();
 
 
-        if (Bukkit.getPluginCommand("globalmarket") != null) {
-            Bukkit.getPluginCommand("globalmarket").setExecutor(new UserCommand());
-        }
-        if (Bukkit.getPluginCommand("globalmarketadmin") != null) {
-            Bukkit.getPluginCommand("globalmarketadmin").setExecutor(new AdminCommand());
+        if (Bukkit.getPluginCommand("market") != null) {
+            Bukkit.getPluginCommand("market").setExecutor(new UserCommand());
         }
 
         Vault.vaultSetup();
@@ -46,8 +44,12 @@ public class Main extends JavaPlugin {
             getServer().getPluginManager().disablePlugin(this);
         } else {
             //初始化数据库
-            if (!MysqlInit.checkTable("market_log")) MysqlInit.init_market_log();
-            if (!MysqlInit.checkTable("market_item_data")) MysqlInit.init_market_item_data();
+            if (!MysqlInit.checkTable("market_log")) {
+                MysqlInit.init_market_log();
+            }
+            if (!MysqlInit.checkTable("market_item_data")) {
+                MysqlInit.init_market_item_data();
+            }
 
             getLogger().info(ChatColor.GREEN + "Mysql connected.");
         }

@@ -1,21 +1,12 @@
 package com.ender.globalmarket.task;
 
 import com.ender.globalmarket.Main;
-import com.ender.globalmarket.common.BukkitUtil;
 import com.ender.globalmarket.data.MarketItem;
 import com.ender.globalmarket.economy.MarketData;
-import com.ender.globalmarket.economy.MarketTrade;
 import com.ender.globalmarket.storage.ConfigReader;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.entity.Item;
-import org.bukkit.entity.Player;
-import com.tripleying.qwq.LocaleLanguageAPI.LocaleLanguageAPI;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -23,7 +14,7 @@ import java.util.stream.Collectors;
 /**
  * 随机收购事件
  */
-public class AcquireTask  implements Runnable{
+public class AcquireTask implements Runnable {
     Logger log = Logger.getLogger("测试");
     private final Main plugin;
 
@@ -53,28 +44,24 @@ public class AcquireTask  implements Runnable{
      * 进行随机收购事件
      */
     @Override
-    public void run(){
-        MarketTrade.randomAcquire = getRandomItem();
-        MarketTrade.randomRestCount = new AtomicInteger(getRandomCount());
-        Material item = MarketTrade.randomAcquire.item;
-        ItemStack is = new ItemStack(item);
-        Logger.getLogger("s").info(LocaleLanguageAPI.getItemName(is));
+    public void run() {
+//        MarketTrade.randomAcquire = getRandomItem();
+//        MarketTrade.randomRestCount = new AtomicInteger(getRandomCount());
+//        Material item = MarketTrade.randomAcquire.item;
+//        ItemStack is = new ItemStack(item);
+//        Logger.getLogger("s").info(LocaleLanguageAPI.getItemName(is));
+//        String itemName = LocaleLanguageAPI.getItemName(is);
+//        Bukkit.broadcast(ChatColor.DARK_GREEN + "[Market]系统限时收购开启，目前以双倍价格收购【" + itemName + "】中哦，限量 " + MarketTrade.randomRestCount + "个"
+//                ,"globalmarket.use");
         //广播全服
-//        TranslatableComponent name = Component.translatable(Material.STICK.name());
-//        StringBuilder stringBuilder = new StringBuilder();
-//        BukkitAudiences bukkitAudiences = BukkitAudiences.create(plugin);
-//        List<Player> players = BukkitUtil.getAllOnlineUser();
-//        for(Player p : players){
-//            bukkitAudiences.player(p).sendMessage(name);
-//        }
-        //Bukkit.broadcast(ChatColor.DARK_GREEN + "[Market]","globalmarket.broadcast");
     }
 
     /**
      * 获取一个随机出售物品
+     *
      * @return
      */
-    public MarketItem getRandomItem(){
+    public MarketItem getRandomItem() {
         List<MarketItem> list = MarketData.getMarketItem();
         //取出剩下的
         list = list.stream().filter(e -> e.x <= ACQUIRE_MAX_PRICE).collect(Collectors.toList());
@@ -87,9 +74,10 @@ public class AcquireTask  implements Runnable{
 
     /**
      * 获取一个随机存量
+     *
      * @return 随机存量
      */
-    public int getRandomCount(){
+    public int getRandomCount() {
         Random r = new Random();
         return ACQUIRE_BASE + r.nextInt(ACQUIRE_GAP);
     }

@@ -9,6 +9,7 @@ import com.ender.globalmarket.storage.Mysql;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import java.sql.Timestamp;
@@ -48,7 +49,7 @@ public class MarketTrade {
     //贸易
     public static void trade(Player player, MarketItem marketItem, int amount, type type) {
         //服主
-        Player op = Bukkit.getPlayer(MarketTrade.op);
+        OfflinePlayer op = Bukkit.getOfflinePlayer(MarketTrade.op);
         double price = 0.0;
         double tax = 0.0;
         //玩家存款
@@ -59,11 +60,12 @@ public class MarketTrade {
                 price = MarketEconomy.getSellingPrice(marketItem, amount,money);
                 //计算贸易税
                 tax = MarketEconomy.getTax(price);
-
                 //更新玩家货币数据
                 Vault.addVaultCurrency(player.getUniqueId(), price - tax);
                 //给服主上税
-                Vault.addVaultCurrency(op.getUniqueId(),tax);
+                try {
+                    Vault.addVaultCurrency(op, tax);
+                }catch (Exception e){}
                 //更新玩家储存
                 Inventory.subtractInventory(player, marketItem.item, amount);
                 break;

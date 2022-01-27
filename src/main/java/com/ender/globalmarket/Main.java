@@ -11,7 +11,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.plugin.java.JavaPlugin;
-import com.tripleying.qwq.LocaleLanguageAPI.*;
 
 import java.util.logging.Logger;
 
@@ -60,7 +59,7 @@ public class Main extends JavaPlugin {
 
         //注册定时
         //两分钟查一次最大人数
-        Bukkit.getScheduler().runTaskTimerAsynchronously
-                (this, new AcquireTask(this), 0L, 20 * 60L * 2);
+//        Bukkit.getScheduler().runTaskTimerAsynchronously
+//                (this, new AcquireTask(this), 0L, 20 * 60L * 2);
     }
 }

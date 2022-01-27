@@ -4,6 +4,7 @@ import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
 import java.util.UUID;
@@ -37,6 +38,10 @@ public class Vault {
             return;
         }
         econ = rsp.getProvider();
+    }
+
+    public static void addVaultCurrency(OfflinePlayer user, double amount) {
+        econ.depositPlayer(user, amount);
     }
 
     public static void addVaultCurrency(UUID user, double amount) {

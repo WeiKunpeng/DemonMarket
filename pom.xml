@@ -56,13 +56,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.apache</groupId>
-            <artifactId>LocaleLanguageAPI</artifactId>
-            <version>1.1.1</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/src/main/lib/LocaleLanguageAPI-v1.1.1.jar</systemPath>
-        </dependency>
-        <dependency>
             <groupId>javax.annotation</groupId>
             <artifactId>javax.annotation-api</artifactId>
             <version>1.3.2</version>

@@ -48,8 +48,11 @@ public class MarketTrade {
 
     //贸易
     public static void trade(Player player, Material material, double value, int amount, type type) {
+        OfflinePlayer op = null;
         //服主
-        OfflinePlayer op = Bukkit.getOfflinePlayer(MarketTrade.op);
+        try {
+            op = Bukkit.getOfflinePlayer(MarketTrade.op);
+        }catch (Exception e){};
         double price = 0.0;
         double tax = 0.0;
         //玩家存款

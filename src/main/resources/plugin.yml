@@ -17,6 +17,6 @@ commands:
     permission-message: You need to have the permission to use this command. Please contact your server OP. # 无权限返回的消息，通常不用
 
 permissions:
-  globalmarket.use:
+  demonmarket.use:
     description: market use permission
     default: true

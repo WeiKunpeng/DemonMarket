@@ -1,3 +1,17 @@
+
+#贸易税率，收税上交给服主
+TaxRate: 0.005
+
+#服主，税率受益人
+OP: Tining
+
+#资产基线
+BasicProperty: 500000
+
+
+###################################
+##########以下参数目前没用############
+###################################
 # Mysql功能区
 Mysql.Username: username
 Mysql.password: 123456
@@ -5,8 +19,6 @@ Mysql.Address: 127.0.0.1
 Mysql.Port: 3306
 Mysql.DataBaseName: database
 
-#贸易税率，收税上交给服主
-TaxRate: 0.005
 
 #启用VIP免税功能,需要插件ECS-LOGIN
 Enable.NoTax: false
@@ -17,9 +29,6 @@ TimeOut.Trade: 10
 #随机事件最小间隔时间
 CD.MarketEvent: 1200
 
-#服主，税率受益人
-OP: Tining
-
 #收购最低数量
 ACQUIRE_BASE: 3000
 #收购数量随机增长额度
@@ -27,5 +36,3 @@ ACQUIRE_GAP: 4000
 #收购物品的价格上限
 CQUIRE_MAX_PRICE: 50
 
-#资产基线
-BasicProperty: 500000

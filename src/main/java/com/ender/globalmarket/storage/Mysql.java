@@ -1,5 +1,6 @@
 package com.ender.globalmarket.storage;
 
+
 import org.bukkit.ChatColor;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -16,22 +17,14 @@ public class Mysql {
     public boolean mysqlInit() {
 
 
-        String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
+        String JDBC_DRIVER = "org.sqlite.JDBC";
 
 
         // 连接参数的固定格式
-        String DB_URL =
-                "jdbc:mysql://" + ConfigReader.getMysqlConfig("Mysql.Address") + ":" +
-                        ConfigReader.getMysqlConfig("Mysql.Port") +
-                        "/" +
-                        ConfigReader.getMysqlConfig("Mysql.DataBaseName") +
-                        "?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
+        String DB_URL ="global.db";
         try {
-            // 驱动名称
-            Class.forName(JDBC_DRIVER); // forName 又来了！
-            connection = DriverManager.getConnection(DB_URL, ConfigReader.getMysqlConfig("Mysql.Username"), ConfigReader.getMysqlConfig("Mysql.password"));
-//            getLogger().info(ChatColor.GREEN + "Mysql successfully connected.");
-
+            Class.forName(JDBC_DRIVER);
+            connection = DriverManager.getConnection(DB_URL);
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
             return false;
@@ -89,7 +82,6 @@ public class Mysql {
     public Connection getConnection() {
         try {
             if (connection == null || !connection.isValid(1000)) {
-//                getLogger().info(ChatColor.RED + "Mysql connection is now closed. Trying to creating a new one.");
                 mysqlInit();
             }
             return connection;

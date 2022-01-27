@@ -1,5 +1,5 @@
-name: GlobalMarket
-main: com.ender.globalmarket.Main
+name: DemonMarket
+main: com.tining.demonmarket.Main
 version: 1.0
 # YAML 中的注释，一行有效
 # 以上是插件基本信息，以下是命令注册
@@ -13,7 +13,7 @@ commands:
       /mt sell 出售手里的物品
       /mt sell all 出售背包里当前所有与手中相同的物品
     description: Buy or sell some item in player's inventory # 描述
-    permission: globalmarket.use
+    permission: demonmarket.use
     permission-message: You need to have the permission to use this command. Please contact your server OP. # 无权限返回的消息，通常不用
 
 permissions:

@@ -21,8 +21,11 @@
 + BasicProperty: 资产基线，最重要的配置。指定期望平均单个玩家持有的储蓄金额。可以根据服务器自身情况增加或者降低。
 + worth: 物价表，使用物品名称。如果想要加入新的物品出售，推荐使用crafttweaker mod的ct hand指令查看名称
 ## 理论支持
-以下为未调优之前的幂函数大致收敛情况，以及计算价格的实际公式。
-其中price=物品设定价格 money=玩家资产 BASE=资产基线 TAX=（1 - 税收）
+以下为未调优之前的幂函数大致收敛情况，以及计算价格的实际公式。 其中
++ price=物品设定价格
++ money=玩家资产
++ BASE=资产基线
++ TAX=（1 - 税收）
 
 ![800资产效果](https://raw.githubusercontent.com/Tining123/DemonMarket/master/src/main/pic/chart.png)
 ![800资产效果](https://raw.githubusercontent.com/Tining123/DemonMarket/master/src/main/pic/math.png)

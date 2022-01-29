@@ -13,6 +13,8 @@
 以上分别为资产5000万，60w以及800的玩家出售钻石块后所得收益
 ## 插件权限列表
 + demonmarket.use 需要给玩家组这个权限才能使用
++ 例如使用Groupmanager命令 /mangaddp builder demonmarket.use 或者 /mangaddp default demonmarket.use
++ luckperm则可以直接通过 /lp editor界面添加
 ## 配置文件 config.yml
 + TaxRate: 税率，是经过收敛公式之后，在进行一次税率收取。默认千分之5，
 + OP: 服主，或者指定税率受益人。所有税收会打入这个玩家的账户。不想使用可以留空。

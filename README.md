@@ -1,5 +1,7 @@
 # DemonMarket
 #### 一个系统商店插件，玩家可以出售物品。采用调优后的幂指函数与反函数混合收敛物价。用于解决工业类服务器某些物品产能过高导致服务器经济失衡的问题。
+通过基于玩家资产的收敛函数，玩家出售物品会逐渐缓步的贬值。在达到指定基线后物品迅速贬值，并且逐步趋减趋近于0但不会到达0。使用这种手段，在玩家初期进入就能开始适应物价收敛，并且可以有效遏制服务器寡头玩家的资产进一步膨胀。
+
 ## 使用方法
 #### 使用用户命令/demonmarket 命令简写为/mt
 + /mt sell 卖掉手里的东西
@@ -17,9 +19,18 @@
 + BasicProperty: 资产基线，最重要的配置。指定期望平均单个玩家持有的储蓄金额。可以根据服务器自身情况增加或者降低。
 + worth: 物价表，使用物品名称。如果想要加入新的物品出售，推荐使用crafttweaker mod的ct hand指令查看名称
 ## 理论支持
+以下为未调优之前的幂函数大致收敛情况，以及计算价格的实际公式。
+其中price=物品设定价格 money=玩家资产 BASE=资产基线 TAX=（1 - 税收）
+
+![800资产效果](https://raw.githubusercontent.com/Tining123/DemonMarket/master/src/main/pic/chart.png)
+![800资产效果](https://raw.githubusercontent.com/Tining123/DemonMarket/master/src/main/pic/math.png)
 
 ## 未来功能
 + 支持mysql和sqlite
 + 通过命令直接调整物价
 + 通过命令直接查看物品名称
-## 
+## 关于项目
++ 采用MIT协议，欢迎提建议，issue，fork或者直接下载使用
++ 如果有问题或者需求可以联系QQ 1340212468
+## 感谢
+原fork项目作者 EnderTheCoder

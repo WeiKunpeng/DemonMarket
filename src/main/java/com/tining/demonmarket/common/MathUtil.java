@@ -26,7 +26,7 @@ public class MathUtil {
      * @return
      */
     public static double priceDownByProperty(double price, double property, double basicProperty){
-        return (price) /Math.pow(Math.exp((property/basicProperty)),0.5)
-                + (price/(1 + property/basicProperty));
+        return ((price) /Math.pow(Math.exp((property/basicProperty)),0.5)
+                + (price/(1 + property/basicProperty)))/2;
     }
 }

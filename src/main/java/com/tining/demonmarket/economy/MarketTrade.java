@@ -13,6 +13,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import java.sql.Timestamp;
+import java.util.Locale;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class MarketTrade {
@@ -46,7 +47,43 @@ public class MarketTrade {
         BUY
     }
 
-    //贸易
+    /**
+     * 模拟贸易
+     * @param player
+     * @param material
+     * @param value
+     * @param amount
+     * @param type
+     */
+    public static double preTrade(Player player, Material material, double value, int amount, type type) {
+        OfflinePlayer op = null;
+        //服主
+        try {
+            op = Bukkit.getOfflinePlayer(MarketTrade.op);
+        }catch (Exception e){};
+        double price = 0.0;
+        double tax = 0.0;
+        //玩家存款
+        double money = Vault.checkCurrency(player.getUniqueId());
+        switch (type) {
+            case SELL: {
+                //计算价格
+                price = MarketEconomy.getSellingPrice(value, amount,money);
+                return price;
+            }
+            default:break;
+        }
+        return value;
+    }
+
+    /**
+     * 进行贸易
+     * @param player
+     * @param material
+     * @param value
+     * @param amount
+     * @param type
+     */
     public static void trade(Player player, Material material, double value, int amount, type type) {
         OfflinePlayer op = null;
         //服主
@@ -78,6 +115,8 @@ public class MarketTrade {
         //记录贸易
         message(player, type, material, amount, price, tax);
     }
+
+
     //计算税后购买价格
     public static double getBuyPriceWithTax(Player player, MarketItem marketItem, int amount) {
         double price = 0.0;
@@ -107,14 +146,7 @@ public class MarketTrade {
             return false;
         }
     }
-    //检测物品是否存在
-    public static boolean isMaterialExists(String material) {
-        return (Material.matchMaterial(material) != null);
-    }
-    //检测市场是否存在该物品
-    public static boolean isMarketItemExists(Material material) {
-        return MarketData.getMarketItem(material) != null;
-    }
+
     //检测市场库存是否充足
 
     /**
@@ -146,13 +178,24 @@ public class MarketTrade {
     }
     //交易提示信息
     public static void message(Player player, type type, Material material, int amount, double price, double tax) {
-        player.sendMessage(ChatColor.GREEN + String.format("[DemonMarket]你成功%s了%s个%s，税后%s$%s，其中贸易税为$%s",
+
+
+        player.sendMessage(ChatColor.GREEN + String.format("[DemonMarket]你成功%s了%s个%s，%s$%s，其中贸易税为$%s",
                 (type == MarketTrade.type.BUY) ? "购买" : "出售",
                 amount,
                 material.name(),
                 (type == MarketTrade.type.BUY) ? "花费" : "所得",
                 (type == MarketTrade.type.BUY) ? MarketEconomy.formatMoney(price + tax) : MarketEconomy.formatMoney(price - tax),
-                tax
+                MarketEconomy.formatMoney(tax)
         ));
+    }
+
+    /**
+     * 近似数字
+     * @param money
+     * @return
+     */
+    public static double formatMoney(double money) {
+        return Double.parseDouble(String.format("%.2f", money));
     }
 }

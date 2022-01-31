@@ -4,6 +4,7 @@ import com.tining.demonmarket.common.MathUtil;
 import com.tining.demonmarket.data.MarketItem;
 import com.tining.demonmarket.storage.ConfigReader;
 
+import java.util.Locale;
 import java.util.logging.Logger;
 
 
@@ -18,6 +19,9 @@ public class MarketEconomy {
      * @return
      */
     public static double formatMoney(double money) {
+        if(ConfigReader.getRoundSetting().toLowerCase(Locale.ROOT).equals("true")){
+            return Double.parseDouble(String.format("%.2f", money));
+        }
         return money;
     }
 

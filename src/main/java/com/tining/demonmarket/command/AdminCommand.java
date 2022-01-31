@@ -1,14 +1,15 @@
 package com.tining.demonmarket.command;
 
-import com.tining.demonmarket.data.MarketItem;
-import com.tining.demonmarket.economy.MarketData;
-import com.tining.demonmarket.economy.MarketTrade;
+import com.tining.demonmarket.storage.ConfigReader;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.util.Map;
+import java.util.Objects;
 
 public class AdminCommand implements CommandExecutor {
 
@@ -17,66 +18,52 @@ public class AdminCommand implements CommandExecutor {
 
         Player player = (Player) sender;
 
-        if (args.length < 1) return false;
+        if (args.length < 1){ return false;}
 
         switch (args[0]) {
             case "set": {
-
-
-                MarketItem marketItem = new MarketItem();
-                if (args.length == 4) {
-                    if (!player.getInventory().getItemInMainHand().getType().name().equals("AIR")) {
-                        marketItem.item = player.getInventory().getItemInMainHand().getType();
-                    } else {
-                        sender.sendMessage(ChatColor.YELLOW + "[DemonMarket]手中没有有效的物品，请检查参数个数或手中是否持有有效物品");
+                //校验参数合法
+                if(args.length < 2){
+                    //应该有一个set和一个价格 两个参数
+                    return false;
+                }
+                //获取物品名称
+                Material itemToSell = player.getInventory().getItemInMainHand().getType();
+                //校验物品是否合法
+                if (Objects.isNull(itemToSell) || itemToSell.name().equals("AIR")) {
+                    sender.sendMessage(ChatColor.YELLOW + "[DemonMarket]你手里的物品无法交易");
+                    return true;
+                }
+                double price = 0.0;
+                //校验价值是否合法
+                try{
+                    price = Double.parseDouble(args[1]);
+                    if(price < 0){
+                        sender.sendMessage(ChatColor.YELLOW + "[DemonMarket]你输入的价格不合法");
                         return true;
                     }
-                } else if (args.length == 5){
-                    marketItem.item = Material.matchMaterial(args[4]);
-                    if (marketItem.item == null) {
-                        sender.sendMessage(ChatColor.YELLOW + "[DemonMarket]无法找到输入的物品，请检查名称");
-                        return true;
-                    }
-                } else return false;
-
-                if (!(MarketTrade.isAmountLegal(args[1]) && MarketTrade.isAmountLegal(args[2]) && MarketTrade.isAmountLegal(args[3]))) {
-                    sender.sendMessage(ChatColor.YELLOW + "[DemonMarket]你输入的数字不合法");
+                }catch (Exception e){
+                    sender.sendMessage(ChatColor.YELLOW + "[DemonMarket]你输入的价格不合法");
                     return true;
                 }
-
-                marketItem.x = Integer.parseInt(args[1]);
-                marketItem.k = Integer.parseInt(args[2]);
-                marketItem.b = Integer.parseInt(args[3]);
-                if (marketItem.b > 4 || marketItem.b < 1) {
-                    sender.sendMessage(ChatColor.YELLOW + "[DemonMarket]你输入的市场稳定指数不合法，我们建议在1-4之间");
-                    return true;
-                }
-                MarketData.putMarketItem(marketItem);
-                sender.sendMessage(ChatColor.GREEN + "[DemonMarketAdmin]成功设置新的可贸易物品" + marketItem.item.name());
-                break;
+                //修改数值
+                Map<String,Double> map =  ConfigReader.getWorth();
+                map.put(itemToSell.name(),price);
+                //修改配置文件
+                //保存
+                ConfigReader.saveWorth(map);
+                ConfigReader.reloadConfig();
+                sender.sendMessage(ChatColor.YELLOW + "[DemonMarket]设置成功");
+                return true;
             }
-            case "remove": {
-                if (args.length != 2) return false;
-                Material material = Material.matchMaterial(args[1]);
-                if (material == null) {
-                    sender.sendMessage(ChatColor.YELLOW + "[DemonMarket]你输入的物品名不存在");
-                    return true;
-                }
-                MarketItem marketItem = MarketData.getMarketItem(material);
-                if (marketItem == null) {
-                    sender.sendMessage(ChatColor.YELLOW + "[DemonMarket]你输入的物品不在可交易物品列表中");
-                    return true;
-                }
-                MarketData.removeMarketItem(marketItem);
-                break;
-            }
-            case "test": {
+            case "reload":{
+                ConfigReader.reloadConfig();
+                sender.sendMessage(ChatColor.YELLOW + "[DemonMarket]重载成功");
+                return true;
             }
             default: {
                 return false;
             }
         }
-
-        return true;
     }
 }

@@ -1,5 +1,6 @@
 package com.tining.demonmarket;
 
+import com.tining.demonmarket.command.AdminCommand;
 import com.tining.demonmarket.command.UserCommand;
 import com.tining.demonmarket.money.Vault;
 import org.bukkit.Bukkit;
@@ -30,6 +31,14 @@ public class Main extends JavaPlugin {
 
         if (Bukkit.getPluginCommand("demonmarket") != null) {
             Bukkit.getPluginCommand("demonmarket").setExecutor(new UserCommand());
+        }
+
+        if (Bukkit.getPluginCommand("mtadmin") != null) {
+            Bukkit.getPluginCommand("mtadmin").setExecutor(new AdminCommand());
+        }
+
+        if (Bukkit.getPluginCommand("demonmarketadmin") != null) {
+            Bukkit.getPluginCommand("demonmarketadmin").setExecutor(new AdminCommand());
         }
 
         Vault.vaultSetup();

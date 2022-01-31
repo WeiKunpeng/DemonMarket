@@ -29,13 +29,17 @@ public class Vault {
         }
     }
 
+
     public static void setupEconomy() {
         if (Bukkit.getServer().getPluginManager().getPlugin("Vault") == null) {
             return;
         }
         RegisteredServiceProvider<Economy> rsp = Bukkit.getServer().getServicesManager().getRegistration(Economy.class);
         if (rsp == null) {
-            return;
+            rsp = Bukkit.getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
+            if(rsp == null) {
+                return;
+            }
         }
         econ = rsp.getProvider();
     }

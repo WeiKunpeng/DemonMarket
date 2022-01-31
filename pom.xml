@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.Tining</groupId>
     <artifactId>DemonMarket</artifactId>
-    <version>1.0</version>
+    <version>1.0.3</version>
     <build>
         <plugins>
             <plugin>
@@ -50,6 +50,10 @@
         <repository>
             <id>sonatype</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
+        </repository>
+        <repository>
+            <id>vault-repo</id>
+            <url>http://nexus.hc.to/content/repositories/pub_releases</url>
         </repository>
     </repositories>
 

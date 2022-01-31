@@ -56,6 +56,11 @@ public class AdminCommand implements CommandExecutor {
                 sender.sendMessage(ChatColor.YELLOW + "[DemonMarket]设置成功");
                 return true;
             }
+            case "name":{
+                Material itemToSell = player.getInventory().getItemInMainHand().getType();
+                sender.sendMessage(ChatColor.YELLOW + "[DemonMarket]你手中拿的是：" + itemToSell.name());
+                return true;
+            }
             case "reload":{
                 ConfigReader.reloadConfig();
                 sender.sendMessage(ChatColor.YELLOW + "[DemonMarket]重载成功");

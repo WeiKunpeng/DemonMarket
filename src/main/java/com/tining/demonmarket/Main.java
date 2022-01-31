@@ -42,6 +42,8 @@ public class Main extends JavaPlugin {
         }
 
         Vault.vaultSetup();
-
+        // <-- Replace with the id of your plugin!
+        int pluginId = 14142;
+        Metrics metrics = new Metrics(this, pluginId);
     }
 }

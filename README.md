@@ -9,6 +9,7 @@
 + /mt sell 卖掉手里的东西
 + /mt sell all 卖掉背包里和手中同样的所有东西
 + /mt price 预估手中物品的出售收益
++ /mt help 查看帮助
 
 #### 使用管理员命令/demonmarketadmin 命令简写为/mtadmin
 + /mtadmin set [价格] 为手中的物品新增或修改价格

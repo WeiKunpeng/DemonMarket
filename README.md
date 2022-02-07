@@ -1,4 +1,4 @@
-# DemonMarket
+# DemonMarket 魔鬼商店
 ![logo](https://raw.githubusercontent.com/Tining123/DemonMarket/master/src/main/pic/logo.png)
 
 #### 一个系统商店插件，玩家可以出售物品。采用调优后的幂指函数与反函数混合收敛物价。用于解决工业类服务器某些物品产能过高导致服务器经济失衡的问题。

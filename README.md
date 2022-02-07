@@ -40,8 +40,8 @@
 + BASE=资产基线
 + TAX=（1 - 税收）
 
-![800资产效果](https://raw.githubusercontent.com/Tining123/DemonMarket/master/src/main/pic/chart.png)
-![800资产效果](https://raw.githubusercontent.com/Tining123/DemonMarket/master/src/main/pic/math.png)
+![未调优曲线图](https://raw.githubusercontent.com/Tining123/DemonMarket/master/src/main/pic/chart.png)
+![实际最终公式](https://raw.githubusercontent.com/Tining123/DemonMarket/master/src/main/pic/math.png)
 
 ## 未来功能
 + 支持mysql和sqlite [-]
